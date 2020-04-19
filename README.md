@@ -1,2 +1,2 @@
 # covid-update
-A web app to get the current situation about the novel Covid-19
+A More user-friendly web app to get the current situation about the novel Covid-19
