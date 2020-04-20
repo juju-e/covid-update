@@ -4,7 +4,7 @@ from operator import itemgetter
 from forms import enter   # form data
 import json
 app=Flask(__name__)
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+app.config['SECRET_KEY'] = 'your_key'
 @app.route('/', methods=['GET', 'POST'])
 def main():
   global form
@@ -27,6 +27,8 @@ def main():
   casesPerOneMillion=res["casesPerOneMillion"]
   continent=res["continent"]
   return render_template("index.html",capital=capital,code=code,name=name,form=form,flag=flag,cases=cases,todaycases=todaycases,deaths=deaths,todayDeaths=todayDeaths,recovered=recovered,casesPerOneMillion=casesPerOneMillion,continent=continent)
+
+
 @app.route('/continents', methods=['GET', 'POST'])
 def continents():
     form=enter()  
@@ -37,8 +39,10 @@ def continents():
         return render_template('404.html',msg=res['message'])
     return render_template("continents.html",form=form,name=res["continent"],cases=res["cases"],todaycases=res["todayCases"],deaths=res["deaths"],todayDeaths=res["todayDeaths"],recovered=res["recovered"],active=res["active"],critical=res["critical"])
 @app.route('/news')
+
+
 def news():
-    res=requests.get("https://newsapi.org/v2/everything?q=Coronavirus;covid-19;quarantine&apiKey=9656a7dbfd1744f69f74e571c0223d64")
+    res=requests.get("https://newsapi.org/v2/everything?q=Coronavirus;covid-19;quarantine&apiKey=your_key")
     articles=json.loads(res.content)["articles"]
     articles=sorted(articles,key=itemgetter('publishedAt'),reverse=True)
     return render_template('news.html',articles=articles)
